@@ -1,3 +1,6 @@
+#I would like to thank Meredith Murphy for helping touch up my is_word_guessed function and this video 
+# (https://www.youtube.com/watch?v=jPmBUoSZ6tY)for giving me an idea of where I should go with this project 
+
 import random
 
 def load_word():
