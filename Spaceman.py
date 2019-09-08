@@ -1,5 +1,6 @@
 #I would like to thank Meredith Murphy for helping touch up my is_word_guessed function and this video 
-# (https://www.youtube.com/watch?v=jPmBUoSZ6tY)for giving me an idea of where I should go with this project 
+# (https://www.youtube.com/watch?v=jPmBUoSZ6tY)for giving me an idea of where I should go with this project,
+# and Ricky Nguyen and George Aoyagi for helping with everything in this project
 
 import random
 
@@ -15,7 +16,7 @@ def load_word():
     words_list = f.readlines()
     f.close()
 
-    words_list = words_list[0].split(' ')
+    # words_list = words_list[0].split(' ')
     secret_word = random.choice(words_list)
     return secret_word
 
@@ -31,11 +32,15 @@ def is_word_guessed(secret_word, letters_guessed):
         bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
     '''
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
-    for letter in secret_word:
-        if letters_guessed == letter:
-            return True
-        else:
-            return False
+    counter = 0
+    for i in secret_word:
+        if i in letters_guessed:
+            counter += 1
+    
+    if counter == len(secret_word):
+        return True 
+    else:
+        return False
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -50,19 +55,32 @@ def get_guessed_word(secret_word, letters_guessed):
     '''
 
     #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
+    display = ""
+    #display.extend(secret_word)
 
-    display = []
+    for i in secret_word:
+        if i in letters_guessed:
+            display += i
+        else:
+            display += "_"
+    return display
 
-    display.extend(secret_word)
+#Test function
+print(get_guessed_word("cat","ca"))
 
-    for i in range (len(display)):
-        display[i] = ("_")
+       # display[i] = ("_")
 
-    for letter in secret_word:
-        if letters_guessed == letter:
-            print (letter) in display
-        else: 
-            return letters_guessed ()
+
+    # for letter in secret_word:
+    #     if letters_guessed == letter:
+    #         print (letter) in display
+    #     else: 
+    #         return letters_guessed 
+
+
+#loop through secret word
+    #check if letters guessed
+
 
 
 def is_guess_in_word(guess, secret_word):
@@ -79,9 +97,8 @@ def is_guess_in_word(guess, secret_word):
     '''
     #TODO: check if the letter guess is in the secret word
 
-    pass
 
-
+    return guess in secret_word
 
 
 def spaceman(secret_word):
@@ -96,19 +113,37 @@ def spaceman(secret_word):
 
     #TODO: show the player information about the game according to the project spec
 
+    print ('''Hello and welcome to Space Man! For this game we will think of a secret word for you 
+              and you will need to guess the letters in the word! You get 7 guesses, if by then you can correctly guess the word,
+              then congrats! Otherwise, you lose.''')
+
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
+    letters_guessed = []
+    life = 3
+    while life > 0 and is_word_guessed == False:
+        guess = input ('''Guess a letter! ''')
+        letters_guessed.append(letters_guessed)
 
-    #TODO: Check if the guessed letter is in the secret or not and give the player feedback
+        #TODO: Check if the guessed letter is in the secret or not and give the player feedback
+        correct = is_guess_in_word(guess, secret_word)
+        if correct:
+            print ('''Good job! Good guess''')
+        else:
+            print ('''Sorry, incorrect guess :(''')
+            life -= 1
 
-    #TODO: show the guessed word so far
+        #TODO: show the guessed word so far
+        print (get_guessed_word(secret_word, letters_guessed))
 
-    #TODO: check if the game has been won or lost
+        #TODO: check if the game has been won or lost
+        is_word_guessed (letters_guessed, secret_word)
 
-
-
-
-
+    if life == 0:
+        print ('''Sorry, you lose''')
+    if is_guess_in_word == True:
+        print ('''Good job!''')
 
 # These function calls that will start the game
+
 secret_word = load_word()
-spaceman(secret_word)
+spaceman(secret_word) 
