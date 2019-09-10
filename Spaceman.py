@@ -1,6 +1,6 @@
 #I would like to thank Meredith Murphy for helping touch up my is_word_guessed function and this video 
 # (https://www.youtube.com/watch?v=jPmBUoSZ6tY)for giving me an idea of where I should go with this project,
-# and Ricky Nguyen and George Aoyagi for helping with everything in this project
+# and Ricky Nguyen, George Aoyagi, and Ben Laferty for helping with everything in this project
 
 import random
 
@@ -16,8 +16,9 @@ def load_word():
     words_list = f.readlines()
     f.close()
 
-    # words_list = words_list[0].split(' ')
+    words_list = words_list[0].split(' ')
     secret_word = random.choice(words_list)
+    print (secret_word)
     return secret_word
 
 def is_word_guessed(secret_word, letters_guessed):
