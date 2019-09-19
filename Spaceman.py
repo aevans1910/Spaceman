@@ -19,7 +19,6 @@ def load_word():
 
     words_list = words_list[0].split(' ')
     secret_word = random.choice(words_list)
-    print (secret_word)
     return secret_word
 
 def is_word_guessed(secret_word, letters_guessed):
@@ -128,3 +127,14 @@ def spaceman(secret_word):
 
 secret_word = load_word()
 spaceman(secret_word) 
+
+def test_spaceman():
+    assert is_guess_in_word("a", "cat") == True
+    assert is_guess_in_word("b", "cat") == False
+    assert is_word_guessed(["a", "c", "t"], "cat") == True
+    assert is_word_guessed(["a", "b", "t"], "cat") == True, "Word is not guessed"
+    assert get_guessed_word("cat", ["a", "t", "b"]) == "_at"
+
+
+if __name__ == "__main__":
+    test_spaceman()
